@@ -68,11 +68,7 @@ const viewservices = ({ services }) => {
             >
               <TableHead>
                 <TableRow>
-                  <TableCell>
-                    <Typography color="textSecondary" variant="h6">
-                      Id
-                    </Typography>
-                  </TableCell>
+                  
                   <TableCell>
                     <Typography color="textSecondary" variant="h6">
                       Title
@@ -81,6 +77,11 @@ const viewservices = ({ services }) => {
                   <TableCell>
                     <Typography color="textSecondary" variant="h6">
                       Image
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography color="textSecondary" variant="h6">
+                      shortDescription
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -95,7 +96,7 @@ const viewservices = ({ services }) => {
                   </TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody>
+              {/* <TableBody>
                 {services.map((product) => (
                   <TableRow key={product._id}>
                     <TableCell>
@@ -148,7 +149,7 @@ const viewservices = ({ services }) => {
                     </TableCell>
                   </TableRow>
                 ))}
-              </TableBody>
+              </TableBody> */}
             </Table>
           </BaseCard>
         </Grid>

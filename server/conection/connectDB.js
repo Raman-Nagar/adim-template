@@ -8,8 +8,9 @@ const connectDB = handler => async (req, res) => {
     const option = {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        useFindAndModify: true,
+        // useFindAndModify: true,
       }
+    //  await mongoose.set('strictQuery', false)
     await mongoose.connect(MONGODB_URI)
     return handler(req, res)
 }

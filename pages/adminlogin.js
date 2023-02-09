@@ -3,6 +3,8 @@ import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import Image from "next/image";
+import logo from '../assets/images/logos/Logo-2.jpeg'
 
 export default function Index({ res }) {
 
@@ -38,6 +40,7 @@ export default function Index({ res }) {
                 });
                 localStorage.setItem("admin", JSON.stringify(email))
                 router.push("/")
+                window.location= "http://localhost:3000"
             }
         }
     }
@@ -45,9 +48,12 @@ export default function Index({ res }) {
     return (
         <>
             <section className="text-gray-600 body-font relative">
-                <div className="container my-10 mx-auto flex">
-                    <div className="lg:w-1/3 md:w-1/2 bg-white rounded-lg p-8 flex flex-col md:m-auto w-full mt-10 md:mt-0 relative z-10 shadow-md">
-                        <h2 className="text-gray-900 text-lg mb-1 font-medium title-font">Login Admin</h2>
+                <div className="container my-24 mx-auto flex">
+                    <div className="lg:w-1/3 md:w-1/2 bg-white rounded-lg p-8 flex flex-col md:m-auto w-full mt-10 md:mt-0 relative z-10 shadow-lg">
+                        <div className="flex flex-col justify-center items-center gap-3">
+                            <Image src={logo} width="150px" height="30px" alt={"LogoDark"} />
+                            <h2 className="text-gray-900 text-lg mb-1 font-medium title-font">Login Admin</h2>
+                        </div>
 
                         <div className="relative mb-4">
                             <label htmlFor="email" className="leading-7 text-sm text-gray-600">Email</label>
@@ -57,8 +63,7 @@ export default function Index({ res }) {
                             <label htmlFor="password" className="leading-7 text-sm text-gray-600">Password</label>
                             <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" id="password" name="password" className="w-full bg-white rounded border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                         </div>
-                        <button onClick={handleSubmit} className='bg-blue-500 text-black p-3 rounded-full'>Button</button>
-
+                        <button onClick={handleSubmit} className='bg-blue-500 text-black p-3 rounded'>login</button>
                     </div>
                 </div>
                 <ToastContainer />

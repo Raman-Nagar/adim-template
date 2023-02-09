@@ -14,6 +14,15 @@ const clientSideEmotionCache = createEmotionCache();
 
 export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  const [token1, setToken1] = React.useState(false)
+  React.useEffect(() => {
+    const token = localStorage.getItem("admin")
+    if (token) {
+      setToken1(true)
+    } else {
+      setToken1(false)
+    }
+  }, [])
 
   return (
     <CacheProvider value={emotionCache}>
@@ -21,12 +30,13 @@ export default function MyApp(props) {
         <title>Flexy NextJs Starter kit page</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <ThemeProvider theme={theme}>
+      {token1 ? <ThemeProvider theme={theme}>
         <CssBaseline />
         <FullLayout>
           <Component {...pageProps} />
         </FullLayout>
-      </ThemeProvider>
+      </ThemeProvider> : <Component {...pageProps} />}
+
     </CacheProvider>
   );
 }

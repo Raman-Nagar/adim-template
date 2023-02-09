@@ -63,11 +63,6 @@ const viewporfolios = ({ portfolios }) => {
                 <TableRow>
                   <TableCell>
                     <Typography color="textSecondary" variant="h6">
-                      Id
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography color="textSecondary" variant="h6">
                       Title
                     </Typography>
                   </TableCell>
@@ -91,20 +86,12 @@ const viewporfolios = ({ portfolios }) => {
               <TableBody>
                 {portfolios.map((product) => (
                   <TableRow key={product._id}>
-                    <TableCell>
-                      <Typography
-                        sx={{
-                          fontSize: "15px",
-                          fontWeight: "500",
-                        }}
-                      >
-                        {product._id}
-                      </Typography>
-                    </TableCell>
+
                     <TableCell>
                       <Typography
                         variant="h6"
                         sx={{
+                          fontSize: "15px",
                           fontWeight: "600",
                         }}
                       >
@@ -119,13 +106,13 @@ const viewporfolios = ({ portfolios }) => {
                         {product.image}
                       </Typography>
                     </TableCell>
-                    <TableCell align="right" className="flex flex-wrap overflow-scroll overflow-x-hidden">
+                    <TableCell align="right" className="flex flex-wrap overflow-hidden">
                       <Typography variant="h6"
                         sx={{
                           width: "150px",
                           height: "100px",
                           fontWeight: "500",
-                        }}>{product.description}....</Typography>
+                        }}>{product.shortdescription}</Typography>
                     </TableCell>
                     <TableCell align="right">
                       <Link href={`/allportfolios/${product._id}`}>

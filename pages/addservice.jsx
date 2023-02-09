@@ -14,11 +14,12 @@ const QuillNoSSRWrapper = dynamic(import('react-quill'), {
 })
 const AddService = () => {
 
-  const [inputIimage, setInputImage] = useState(null)
-  const [image, setImage] = useState(null)
+  // const [image, setImage] = useState("")
+  const [image, setImage] = useState([])
   const [title, setTitle] = useState('')
   const [shortdescription, setShortdescription] = useState('')
   const [description, setDescription] = useState('')
+  const [texteditor, setTexteditor] = useState('')
   const router = useRouter()
 
   useEffect(() => {
@@ -28,45 +29,51 @@ const AddService = () => {
     }
   }, [])
 
-
-
-
   const handleImage = (e) => {
-    const file = e.target.files[0]
-    setImageInput(file)
-    const fileReader = new FileReader()
-    fileReader.onload = function (e) {
-      setImage(e.target.result)
-    }
-    fileReader.readAsDataURL(file)
+    // const file = e.target.files[0]
+    const file = e.target.files
+    // const fileReader = new FileReader()
+    // fileReader.onload = function (e) {
+    //   setImage(e.target.result)
+    // }
+    // fileReader.readAsDataURL(file)
   }
 
-
   const handleSubmit = async () => {
-    if (!title || !shortdescription || !description) {
+    console.log(texteditor)
+    if (!title || !shortdescription || !description || !image) {
       toast.warn('please fill data !', {
         position: toast.POSITION.TOP_RIGHT
       });
     }
     else {
-
       let formdata = new FormData()
       formdata.append("title", title)
       formdata.append("shortdescription", shortdescription)
       formdata.append("description", description)
-      formdata.append("image", imageInput)
+      formdata.append("texteditor", texteditor)
 
-
-      const sevice = await axios.post(`http://localhost:3000/api/addservices`, formdata, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Cache-Control': 'no-cache',
-          'Accept': 'application/json'
-        }
+      Array.from(image).forEach((item) => {
+        formdata.append("products", item)
       })
-      console.log(sevice.data)
-      console.log(sevice)
+      // const service = await fetch("/api/addservice", {
+      //   method: "POST",
+      //   body: JSON.stringify({ title, shortdescription, image, description, texteditor }),
+      //   headers: {
+      //     'Content-Type': 'application/json ',
+      //     'Accept': 'application/json',
+      //   }
+      // })
+      const res = await axios.post(`api/imgupload`, formdata, {
+        headers: { 'content-type': 'multipart/form-data' }
+      })
+      console.log(formdata)
       if (res.data.status === 201) {
+
+
+        // console.log(sevice.data)
+
+        // if (service.status) {
         toast.success('services ADD successfully !', {
           position: toast.POSITION.TOP_CENTER
         });
@@ -92,7 +99,7 @@ const AddService = () => {
                 value={title} onChange={(e) => setTitle(e.target.value)}
               />
 
-              <input className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" type="file" id="formFileDisabled" name='photo' onChange={handleImage} multiple />
+              <input className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" type="file" id="formFileDisabled" name='photo' onChange={handleImage} />
 
               <TextField
                 id="shortdescription"
@@ -110,11 +117,12 @@ const AddService = () => {
               />
             </Stack>
             <br />
-            <QuillNoSSRWrapper theme="snow" />
+            <QuillNoSSRWrapper theme="snow" className="my-5" onChange={(e) => setTexteditor(e)} />
             <Button variant="contained" mt={2} onClick={handleSubmit}>
               Add Service
             </Button>
-            {/* <div>
+            {/* {texteditor}
+            <div>
               {image && <img src={image} alt=""
                 style={{ width: "300px", height: "200px" }}
               />}

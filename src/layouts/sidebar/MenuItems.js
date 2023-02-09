@@ -24,11 +24,11 @@ const Menuitems = [
     icon: "eye",
     href: "/allportfolios",
   },
-  // {
-  //   title: "Alerts",
-  //   icon: "info",
-  //   href: "/alerts",
-  // },
+  {
+    title: "Contact Request",
+    icon: "user",
+    href: "/contactrequests",
+  },
   // {
   //   title: "Ratings",
   //   icon: "star",
@@ -41,7 +41,7 @@ const Menuitems = [
   // },
   // {
   //   title: "Pagination",
-  //   icon: "user",
+  //   icon: "info",
   //   href: "/pagination",
   // },
   // {

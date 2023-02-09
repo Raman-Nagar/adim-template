@@ -40,6 +40,7 @@ const ProfileDD = () => {
   const handleLogout = () => {
     localStorage.clear();
     router.push("/adminlogin")
+    window.location= "http://localhost:3000/adminlogin"
   }
   return (
     <>
